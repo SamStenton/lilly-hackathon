@@ -6,10 +6,8 @@ module.exports.controller = function(app) {
 	});
 
 	app.get('/remember-tile/level/:level', function(req, res) {
-		// 4x4 = 16
-		var level = [4,5,5,6,7,8,9]
+		var level = [4,5,5,6,7,8,9,10,13]
 		var tiles = level[req.params.level];
-		// var arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
 		var arr = Array.from(Array(15).keys());
 		arr = arr.map(function(el, index) {
 			return el + 1;
