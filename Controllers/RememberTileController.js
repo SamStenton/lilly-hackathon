@@ -9,11 +9,11 @@ module.exports.controller = function(app) {
 		// 4x4 = 16
 		var level = [4,5,5,6,7,8,9]
 		var tiles = level[req.params.level];
-		var arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
-		// var arr = Array.from(Array(15).keys());
-		// arr = arr.map(function(el, index) {
-		// 	return el + 1;
-		// });
+		// var arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+		var arr = Array.from(Array(15).keys());
+		arr = arr.map(function(el, index) {
+			return el + 1;
+		});
 
 		arr.sort(function() { return 0.5 - Math.random() });
 		return res.send(arr.slice(0,tiles))

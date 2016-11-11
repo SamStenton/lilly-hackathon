@@ -16,7 +16,7 @@
 				<p>Your final Score has been submited.</p>
 				<p>Your final level: {{ level }}.</p>
 				<a class="button is-info is-large" @click="restart()" v-show="failed">Go Again</a>
-				<a class="button is-info is-outlined is-large" href="/tests">Try antother test</a>
+				<a class="button is-info is-outlined is-large" href="/tests">Try onother test</a>
 			</div>
 		 
 		  <div class="modal-section">
