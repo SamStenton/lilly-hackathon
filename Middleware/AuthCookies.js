@@ -3,18 +3,15 @@ module.exports.middleware = function(app) {
 	var shortid = require('shortid');
 	//Cookie Middleware
 	app.use(function (req, res, next) {
-		var cookies = req.cookies
+		if ( req.path == '/user/create') return next();
 
-		if (cookies.userCookie === undefined && req.url !== '/user/create') {
-			res.redirect('/user/create')
-		} else {
-			User.findUserById(cookies.userCookie, function(err, user) {
-				if (err) {console.log(err)}
-				req.user = JSON.parse(user);
-			});
-		}
-
-		next()
+		User.authenticate(req, function(result) {
+			if (result === undefined) {
+				res.redirect('/user/create')
+			}
+			req.user = JSON.parse(result);
+			next()
+		});
 	})
 
 }
