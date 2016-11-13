@@ -1,6 +1,7 @@
 <template>
 	<div class="container">
-	  Level {{level}}
+	<h1 class="title">Tiles</h1>
+	<h3 class="subtitle">Current Level: Level {{level}}</h3>
 	  <p>Left to Find: {{toFind}}</p>
 	<div class="modal" v-bind:class="{ modalActive: modalActive }">
 		<div class="modal-background"></div>
@@ -32,6 +33,11 @@
 	        <div class="square" @click="clicked(r,s)" v-for="s in squaresInRow"></div>
 	      </div>
 	  </div>
+	  <div class="infoContainer">
+	  	<p>Click the squares that flash on start. The further you progress the harder it will become. Come back to test
+	  	yourself each week.</p>
+	  </div>
+
 	</div>
 </template>
 <script>
@@ -100,8 +106,11 @@ export default {
 	    	for (var i = 0; i < list.length; i++) {
 	    		list[i].classList.add('failed');
 	    	}
-	    	this.failed = true;
-	    	this.modalActive = true;
+
+	    		this.failed = true;
+	    		this.modalActive = true;
+
+
 	    },
 	    clearBoard()  {
 			var list = document.getElementsByClassName("square");
@@ -139,17 +148,23 @@ export default {
 </script>
 <style>
 	.container {
-	  background: lightblue;
 	  width: 100%;
 	  height: 100%;
 	}
 
 	.innerContainer {
+	background: lightblue;
 	  width: 400px;
 	  height: 400px;
 	  flex-wrap: wrap;
 	  display: flex;
 	  margin: auto;
+	}
+
+	.infoContainer {
+		width: 400px;
+		height: 400px;
+		margin: 50px auto;
 	}
 
 	.row {
