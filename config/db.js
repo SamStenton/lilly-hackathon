@@ -1,9 +1,9 @@
 module.exports = {
   query: function(sql, params, cb) {
   	var db = require('pg-query');
-    var pg = require('pg');
+    // var pg = require('pg');
   	db.connectionParameters = process.env.DATABASE_URL;
-    if (process.env.ENV!=="local") {pg.defaults.ssl = true;}
+    // if (process.env.ENV!=="local") {pg.defaults.ssl = true;}
 
 
   	var promise = db(sql, params);
