@@ -11,10 +11,11 @@
 				<button class="button is-success is-outlined is-large" @click="getNewSet()">Next</button>
 			</div>
 			<div class="modal-section" v-if="failed">
-				<h2 class="title">That was inccorect</h2>
+				<h2 class="title">That was incorrect</h2>
 				<p>Your final Score has been submited.</p>
 				<p>Your final level: {{ level }}.</p>
-				<button class="button is-warning is-outlined is-large" @click="restart()" v-show="failed">Go Again</button>
+				<a class="button is-info is-large" @click="restart()" v-show="failed">Go Again</a>
+				<a class="button is-info is-outlined is-large" href="/tests">Try antother test</a>
 			</div>
 		 
 		  <div class="modal-section">
@@ -222,7 +223,7 @@ export default {
 		padding: 50px;
 	}
 
-	.modal-section button {
+	.modal-section button,a {
 		margin-top: 20px;
 	}
 </style>
