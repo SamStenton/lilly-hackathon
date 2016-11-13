@@ -8,9 +8,10 @@ module.exports.middleware = function(app) {
 		if (cookies.userCookie === undefined && req.url !== '/user/create') {
 			res.redirect('/user/create');
 		}
-	
+
 		User.findUserById(cookies.userCookie, function(err, user) {
-			req.user = user;
+			if (err) {console.log(err)}
+			req.user = JSON.parse(user);
 			next()
 		});
 	})
