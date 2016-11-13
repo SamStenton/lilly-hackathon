@@ -36,7 +36,7 @@
 
 	  query(sql, [id], function(err, result) {
 	    if (err) return cb(err);
-	    cb(null, JSON.stringify(result.rows[0]));
+	    cb(null, JSON.parse(JSON.stringify(result.rows[0])));
 	  });
 	};
 
