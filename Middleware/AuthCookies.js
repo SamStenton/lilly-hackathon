@@ -6,12 +6,13 @@ module.exports.middleware = function(app) {
 		var cookies = req.cookies
 
 		if (cookies.userCookie === undefined) {
-			var user = new User()
-			res.cookie('userCookie', user.id, { maxAge: (10000 * 365 * 24 * 60 * 60), httpOnly: true })
+			res.redirect('/user/create');
 		}
-		//Set user details
-		user == undefined ? req.user = User.get(cookies.userCookie) : req.user = user
-	  	next()
+
+		User.findUserById(cookies.userCookie, function(err, user) {
+			req.user = JSON.parse(user);
+			next()
+		});
 	})
 
 }
