@@ -1,6 +1,7 @@
 module.exports.controller = function(app) {
 	var shortid = require('shortid')
 	var User = require('../Models/User')
+	var RememberTile = require('../Models/RememberTile')
 
 	app.get('/user/create', function(req, res) {
 		if (req.cookies.userCookie !== undefined) {
@@ -13,13 +14,23 @@ module.exports.controller = function(app) {
 	
 	app.post('/user/create', function(req, res) {
 		new User(req.cookies.userCookie, req.body, function(err, user) {
-			res.redirect('/');
+			res.redirect('/tests');
 		})
 	});
 
 	app.get('/user/account', function(req, res) {
-		res.render('user/account', {user: req.user});
+		RememberTile.getResults(req.user.id, function(error, firstRow, results) {
+			var tilesResults = results.rows.map(function(element) {
+				element.created_at = new Date(element.created_at).toISOString().replace(/T/, ' ').replace(/\..+/, '')
+				element.data = JSON.parse(element.data)
+				return JSON.parse(JSON.stringify(element))	
+			});	
+			res.render('user/account', {user: req.user, tiles: tilesResults});
+		});
+
+
 	});
+
 	app.get('/user/reset', function(req, res) {
 		res.clearCookie('userCookie');
 		res.redirect('/');
