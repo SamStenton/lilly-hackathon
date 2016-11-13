@@ -5,12 +5,12 @@ module.exports.middleware = function(app) {
 	app.use(function (req, res, next) {
 		var cookies = req.cookies
 
-		if (cookies.userCookie === undefined) {
+		if (cookies.userCookie === undefined && req.url !== '/user/create') {
 			res.redirect('/user/create');
 		}
-
+	
 		User.findUserById(cookies.userCookie, function(err, user) {
-			req.user = JSON.parse(user);
+			req.user = user;
 			next()
 		});
 	})

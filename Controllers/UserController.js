@@ -12,9 +12,9 @@ module.exports.controller = function(app) {
 	});
 	
 	app.post('/user/create', function(req, res) {
-		var newUser = new User(req.cookies.userCookie, req.body)
-		// res.cookie('userCookie', newUser.id, { maxAge: (10000 * 365 * 24 * 60 * 60), httpOnly: true })
-		res.send(newUser.id)
+		new User(req.cookies.userCookie, req.body, function(err, user) {
+			res.redirect('/');
+		})
 	});
 
 	app.get('/user/account', function(req, res) {

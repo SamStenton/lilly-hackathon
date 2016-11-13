@@ -13,11 +13,11 @@
 	  });
 	}
 	
-	function User(userId, req) {
+	function User(userId, req, cb) {
 		var sql = `
 		  INSERT
 		  INTO users(name, age, email, cookieId)
-		  VALUES($1, $2, $3, $4) RETURNING cookieId as id
+		  VALUES($1, $2, $3, $4) RETURNING *
 		`;
 
 		query(sql, [req.name, req.age, req.email, userId], function(err, result) {
