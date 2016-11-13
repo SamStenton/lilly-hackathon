@@ -5,7 +5,7 @@ module.exports = {
 
   	var promise = db(sql, params);
   	function onSuccess(rows, result) {
-  		cb(null, JSON.stringify(result))
+  		cb(null, JSON.stringify(rows[0]), result)
   		done();
   	}
   	function onError(error) {
