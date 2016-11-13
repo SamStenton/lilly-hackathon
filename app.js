@@ -27,7 +27,7 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
   .on('error', function(error) {
     console.log(error)
   });
-  client.query('CREATE TABLE IF NOT EXISTS tiles(id SERIAL PRIMARY KEY, user_id text not null, data text, create_at timestamp);')
+  client.query('CREATE TABLE IF NOT EXISTS tiles(id SERIAL PRIMARY KEY, user_id integer, data text, created_at timestamp);')
   .on('error', function(error) {
     console.log(error)
   });
