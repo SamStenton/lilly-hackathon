@@ -12,8 +12,9 @@
 			</div>
 			<div class="modal-section" v-if="failed">
 				<h2 class="title">That was inccorect</h2>
+				<p>Your final Score has been submited.</p>
 				<p>Your final level: {{ level }}.</p>
-				<button class="button is-warning is-outlined is-large" @click="getNewSet(true)" v-show="failed">Go Again</button>
+				<button class="button is-warning is-outlined is-large" @click="restart()" v-show="failed">Go Again</button>
 			</div>
 		 
 		  <div class="modal-section">
@@ -54,6 +55,11 @@ export default {
 			this.modalActive = false;
 			this.getNewSet();
 		},
+		restart() {
+			this.modalActive = false;
+			this.level = 0;
+			this.getNewSet();
+		},
 		clicked(row, square) {
 			if (!this.failed) {
 		  		var num = ((row-1)*this.rows)+(square);
@@ -88,6 +94,7 @@ export default {
 
 	    },
 	    failedLevel() {
+	    	this.submit();
 	    	var list = document.getElementsByClassName("square");
 	    	for (var i = 0; i < list.length; i++) {
 	    		list[i].classList.add('failed');
@@ -101,6 +108,19 @@ export default {
 				el.classList.remove('correct', 'flash', 'failed')
 			});
 	    	this.squares = [];
+	    },
+	    submit() {
+	    	var data = {
+	    		level: this.level,
+	    		squares: this.squaresToFind,
+	    		failedWith: this.toFind
+	    	}
+
+	    	this.$http.post(`/tests/remember-tile/score`, data).then((response) => {
+	    		console.log("Submited")
+	    	}, (response) => {
+	    	  console.log("Go Error: ", response.data)
+	    	});
 	    }
 	  },
 	  computed: {
