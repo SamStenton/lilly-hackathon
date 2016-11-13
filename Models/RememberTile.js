@@ -1,6 +1,5 @@
-// var pg = require('pg');
 var db = require('../config/db');
-if (process.env.ENV!=="local") {pg.defaults.ssl = true;}
+
 
 function RememberTile() {}
 
