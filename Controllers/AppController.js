@@ -4,8 +4,13 @@ module.exports.controller = function(app) {
 	 * a home page route
 	 */
 	app.get('/', function(req, res) {
-		res.render('index', {user: req.user})
+		res.redirect('/tests')
 	});
+
+	app.get('/tests', function(req, res) {
+		res.render('tests/index', {user: req.user});
+	});
+
 
 
 }
