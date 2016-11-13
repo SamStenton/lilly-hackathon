@@ -15,4 +15,14 @@ RememberTile.log = function(user, data, cb) {
   db.query(sql, [user.id, JSON.stringify(data)], cb);
 };
 
+RememberTile.getResults = function(user_id, cb) {
+  var sql = `
+    SELECT * FROM tiles
+	WHERE user_id = $1
+	ORDER BY created_at desc
+  `;
+
+  db.query(sql, [user_id], cb);
+};
+
 module.exports = RememberTile;
