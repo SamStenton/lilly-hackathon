@@ -8,7 +8,7 @@ var fs = require('fs');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var app = express();
-var pgp = require('pg-promise')()
+// var pgp = require('pg-promise')()
 var pg = require('pg');
 var env = require('dotenv').config()
 if (process.env.ENV!=="local") {pg.defaults.ssl = true;}

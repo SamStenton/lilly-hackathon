@@ -1,18 +1,8 @@
-var pg = require('pg');
+// var pg = require('pg');
+var db = require('../config/db');
 if (process.env.ENV!=="local") {pg.defaults.ssl = true;}
 
 function RememberTile() {}
-
-function query(sql, params, cb) {
-  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-    if (err) { 
-      done(); // release client back to pool
-      cb(err);
-      return;
-    }
-    client.query(sql, params, cb);
-  });
-}
 
 RememberTile.log = function(user, data, cb) {
   var sql = `
@@ -22,10 +12,7 @@ RememberTile.log = function(user, data, cb) {
    	RETURNING *
   `;
 
-  query(sql, [user.id, JSON.stringify(data)], function(err, result) {
-    if (err) return cb(err);
-    cb(null, result.rows[0]);
-  });
+  db.query(sql, [user.id, JSON.stringify(data)], cb);
 };
 
 module.exports = RememberTile;
