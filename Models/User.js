@@ -1,8 +1,6 @@
 	var shortid = require('shortid')
 	var db = require('../config/db');
-
-	if (process.env.ENV!=="local") {pg.defaults.ssl = true;}
-	
+		
 	function User(userId, req, cb) {
 		var sql = `
 		  INSERT
