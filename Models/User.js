@@ -9,7 +9,7 @@
 		  INTO users(name, age, email, cookieId)
 		  VALUES($1, $2, $3, $4) RETURNING *
 		`;
-		
+
 		db.query(sql, [req.name, req.age, req.email, userId], cb);
 	}
 
@@ -22,7 +22,6 @@
 	    LIMIT 1
 	  `;
 	  db.query(sql, [id], cb);
-
 	};
 
 module.exports = User;
